@@ -21,12 +21,12 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping
-    private List<UserDto> getAll() {
+    private ResponseEntity<?> getAll() {
         try {
             List<UserDto> users = userService.getAll();
-            return users;
+            return ResponseEntity.ok().body(users);
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_users")
+@Table(name = "TB_USERS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,12 +38,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private UserRoles role;
 
     public User(UserDto userDto) {
         this.name = userDto.name();
         this.login = userDto.login();
         this.password = userDto.password();
+        this.role = userDto.role();
     }
 
     @Override

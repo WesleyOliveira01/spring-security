@@ -26,13 +26,18 @@ public class UserServiceImpl implements UserService {
         User user = new User(userDto);
         user.setPassword(hasPassword);
         userRepository.save(user);
-        return new UserDto(user.getName(), user.getLogin(), user.getPassword());
+        return new UserDto(user);
     }
 
     @Override
     public List<UserDto> getAll() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(UserDto::new).toList();
+        try {
+            List<User> users = userRepository.findAll();
+            return users.stream().map(UserDto::new).toList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 }
